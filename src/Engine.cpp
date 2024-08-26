@@ -37,9 +37,21 @@ Engine::Engine() {
             cout << "The number inserted is not relatively prime to toitent N" << "\n";
         }
     }
-    d = Util::getDecryptionKey(toitentN, e);
-    cout << "The decryption key: " << d << "\n";
+    vector<int> recs = Util::getDecryptionKey(toitentN, e);
+    cout << "The decryption keys (First five are " << recs[0] << ", " << recs[1] << ", " << recs[2] << ", " << recs[3] << ", " << recs[4] << "): " << "\n";
+    cout << "Choose your decryption key: ";
+    while (true) {
+        cin >> d;
+        if (e*d % toitentN == 1) {
+            break;
+        } else {
+            cout << "This number's modulus to toitent N is not 1" << "\n";
+            cout << "Choose your decryption key: ";
+        }
+    }
     Turing t(plainChar, e, d, n);
     t.encrypt();
     t.decrypt();
+    cout << "\n";
+    t.printEncryptAndDecrypt();
 }

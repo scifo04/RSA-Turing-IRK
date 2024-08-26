@@ -23,4 +23,5 @@ class Turing {
         void encrypt();
         void decrypt();
         void printTuring();
+        void printEncryptAndDecrypt();
 };

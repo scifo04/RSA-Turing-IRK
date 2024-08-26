@@ -51,7 +51,7 @@ void Turing::encrypt() {
     }
     if (isSimulated) {
         printTuring();
-        this_thread::sleep_for(chrono::milliseconds(500));
+        this_thread::sleep_for(chrono::milliseconds(250));
     }
     while (initialState != finalState) {
         tuple<string,string,string> resStatus = turingDictEncrypt.at(make_pair(initialState,statusMap[currIndex]));
@@ -64,7 +64,7 @@ void Turing::encrypt() {
         }
         if (isSimulated) {
             printTuring();
-            this_thread::sleep_for(chrono::milliseconds(500));
+            this_thread::sleep_for(chrono::milliseconds(250));
         }
         if (get<2>(resStatus) == "R") {
             currIndex++;
@@ -102,7 +102,7 @@ void Turing::decrypt() {
     }
     if (isSimulated) {
         printTuring();
-        this_thread::sleep_for(chrono::milliseconds(500));
+        this_thread::sleep_for(chrono::milliseconds(250));
     }
     while (initialState != finalState) {
         tuple<string,string,string> resStatus = turingDictDecrypt.at(make_pair(initialState,statusMap[currIndex]));
@@ -115,7 +115,7 @@ void Turing::decrypt() {
         }
         if (isSimulated) {
             printTuring();
-            this_thread::sleep_for(chrono::milliseconds(500));
+            this_thread::sleep_for(chrono::milliseconds(250));
         }
         if (get<2>(resStatus) == "R") {
             currIndex++;
@@ -150,4 +150,19 @@ void Turing::printTuring() {
         }
     }
     cout << "\n" << "\n";
+}
+
+void Turing::printEncryptAndDecrypt() {
+    cout << "Encryption Result: ";
+    for (string s: encrypted) {
+        if (s != "B") {
+            cout << Util::forceDigit(s,to_string(n).length());
+        }
+    }
+    cout << "\n";
+    cout << "Decryption Result: ";
+    for (int i = 1; i < decrypted.size()-1; i++) {
+        cout << decrypted[i];
+    }
+    cout << "\n";
 }

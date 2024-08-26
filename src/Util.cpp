@@ -29,15 +29,16 @@ bool Util::isRelativelyPrime(int x, int y) {
     return gcd(x,y) == 1;
 }
 
-int Util::getDecryptionKey(int toitentN, int e) {
+vector<int> Util::getDecryptionKey(int toitentN, int e) {
+    vector<int> recList;
     int k = 0;
-    while (true) {
+    while (recList.size() <= 5) {
         if ((1+toitentN*k) % e == 0) {
-            break;
+            recList.push_back((1+toitentN*k)/e);
         }
         k++;
     }
-    return (1+toitentN*k)/e;
+    return recList;
 }
 
 vector<string> Util::turingify(string text) {
