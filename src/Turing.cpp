@@ -156,7 +156,7 @@ void Turing::printEncryptAndDecrypt() {
     cout << "Encryption Result: ";
     for (string s: encrypted) {
         if (s != "B") {
-            cout << Util::forceDigit(s,to_string(n).length());
+            cout << Util::forceDigit(s,to_string(n).length()) << " ";
         }
     }
     cout << "\n";

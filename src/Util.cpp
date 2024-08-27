@@ -1,4 +1,5 @@
 #include "Util.hpp"
+#include "Serialize.hpp"
 #include <iostream>
 #include <numeric>
 #include <cmath>
@@ -76,4 +77,33 @@ string Util::forceDigit(string value, int digits) {
     } catch (exception e) {
         return value;
     }
+}
+
+vector<string> Util::stringEncryption(vector<string> list, int enKey, int n) {
+    vector<string> newList(list);
+    for (int i = 1; i < newList.size()-1; i++) {
+        newList[i] = Util::forceDigit(Util::crypt(Serialize::createSerial(list[i]),enKey,n),to_string(n).length());
+    }
+    return newList;
+}
+
+vector<string> Util::stringDecryption(vector<string> list, int deKey, int n) {
+    vector<string> newList(list);
+    for (int i = 1; i < newList.size()-1; i++) {
+        newList[i] = Serialize::numericEq.at(Util::forceDigit(Util::crypt(newList[i],deKey,n),2));
+    }
+    return newList;
+}
+
+void Util::printEncryptDecryptList(vector<string> enc, vector<string> dec) {
+    cout << "Regular Method: " << "\n";
+    cout << "Encryption Result: ";
+    for (int i = 1; i < enc.size()-1; i++) {
+        cout << enc[i] << " ";
+    }
+    cout << "\n" << "Decryption Result: ";
+    for (int i = 1; i < dec.size()-1; i++) {
+        cout << dec[i];
+    }
+    cout << "\n";
 }

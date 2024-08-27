@@ -49,9 +49,36 @@ Engine::Engine() {
             cout << "Choose your decryption key: ";
         }
     }
-    Turing t(plainChar, e, d, n);
-    t.encrypt();
-    t.decrypt();
+    string s;
+    bool isRegular = false;
+    bool isTuring = false;
     cout << "\n";
-    t.printEncryptAndDecrypt();
+    cout << "Choose methods (Regular/Turing/Both): ";
+    cin >> s;
+    if (s == "Regular") {
+        isRegular = true;
+    } else if (s == "Turing") {
+        isTuring = true;
+    } else if (s == "Both") {
+        isRegular = true;
+        isTuring = true;
+    }
+    vector<string> encryptedChar;
+    vector<string> decryptedChar;
+    if (isRegular) {
+        encryptedChar = Util::stringEncryption(plainChar, e, n);
+        decryptedChar = Util::stringDecryption(encryptedChar, d, n);
+    }
+    if (isTuring) {
+        Turing t(plainChar, e, d, n);
+        t.encrypt();
+        t.decrypt();
+        cout << "\n";
+        cout << "Turing Method: " << "\n";
+        t.printEncryptAndDecrypt();
+    }
+    if (isRegular) {
+        cout << "\n";
+        Util::printEncryptDecryptList(encryptedChar,decryptedChar);
+    }
 }
